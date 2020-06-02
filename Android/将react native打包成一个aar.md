@@ -89,11 +89,37 @@ https://www.jianshu.com/p/2ef1642b769b
 
 
 
-然后命令行上传:
+## 然后命令行上传:
 
-mvn deploy:deploy-file -DgroupId=org.webkit -DartifactId=android-jsc -Dversion=r245459 -Dfile=android-jsc-r245459.aar -Durl=https://git.xxxx.com:8856/repository/maven-releases/ -X -DrepositoryId=releases
+mvn deploy:deploy-file -DgroupId=org.webkit -DartifactId=android-jsc -Dversion=r245459 -Dfile=android-jsc-r245459.aar -Durl=https://git.xxxx.com:8856/repository/maven-releases/ -X -DrepositoryId=releases -DpomFile=android-jsc-r245459.pom
 
-上传后:
+### 参数说明:
+
+mvn deploy:deploy-file
+
+-DgroupId=com.alibaba.csp  //groupId
+
+-DartifactId=sentinel-annotation-aspectj // artifactId
+
+-Dversion=1.2-SNAPSHOT  //version
+
+-Dfile=g:\sentinel-annotation-aspectj-1.4.0.jar  //jar包路径及jar包文件名
+
+-Dpackageing=jar  //上传文件的格式
+
+ -DpomFile=pom.xml  //重点在这， 必须单独上传jar中的pom.xml
+
+-DrepositoryId=user-thirdparty //连接maven私服的登录名及密码， 在maven > setting.xml 中配置好的
+
+-Durl=http://IP:8081/nexus/content/repositories/snapshots/ //上传的私服路径及目录
+
+### 一个参数都不能少
+
+如果少了 -DrepositoryId,则无法读取setting.xml里相应id的用户名密码,会401
+
+如果少了-DpomFile,则会自动使用空的pom,少了原来pom中相关依赖
+
+## 上传后:
 
 ![企业微信截图_79326649-d0ae-4f8c-a4e3-6bb6117a8c64](http://hss01248.tech/uPic/2020-05-27-19-30-21-企业微信截图_79326649-d0ae-4f8c-a4e3-6bb6117a8c64.png)
 
@@ -105,6 +131,29 @@ mvn deploy:deploy-file -DgroupId=org.webkit -DartifactId=android-jsc -Dversion=r
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 
+
+
+
+
+
+## 如果使用code push,还需要在app.gradle中增加;
+
+```
+gradle.projectsEvaluated {
+    android.buildTypes.each {
+        // to prevent incorrect long value restoration from strings.xml we need to wrap it with double quotes
+        // https://github.com/Microsoft/cordova-plugin-code-push/issues/264
+        it.resValue 'string', "CODE_PUSH_APK_BUILD_TIME",
+                String.format("\"%d\"", System.currentTimeMillis())
+    }
+}
+```
+
+## 疑问: assets能够打进aar中:
+
+可以的:
+
+![image-20200528103924470](http://hss01248.tech/uPic/2020-05-28-10-39-27-image-20200528103924470.png)
 
 
 
