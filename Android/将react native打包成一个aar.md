@@ -1,5 +1,8 @@
 # 如何将react native打包成一个aar
 
+> 一句话总结: 本地文件夹方式的maven依赖改成远程maven仓库依赖,同时rn的打包产物bundle文件放到子module的assets目录下. 
+
+
 # 首先 ,如何在现有Android项目中引入 react native:
 
 https://reactnative.cn/docs/integration-with-existing-apps
@@ -149,7 +152,7 @@ gradle.projectsEvaluated {
 }
 ```
 
-## 疑问: assets能够打进aar中:
+## 疑问: assets能够打进aar中吗?
 
 可以的:
 
