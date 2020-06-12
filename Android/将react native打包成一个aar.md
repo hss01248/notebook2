@@ -162,9 +162,37 @@ gradle.projectsEvaluated {
 
 
 
+# 启动调试
 
+https://reactnative.cn/docs/integration-with-existing-apps
 
+## 1 端口映射 
 
+adb reverse tcp:8081 tcp:8081
+
+## 2 运行 Packager
+
+运行应用首先需要启动开发服务器（Packager）。你只需在项目根目录中执行以下命令即可：
+
+```
+$ yarn start
+```
+
+## 3 使用chrome tools看js日志
+
+ http://localhost:8081/debugger-ui
+
+https://reactnative.cn/docs/debugging
+
+## 4 或者使用单独的debug工具:
+
+npm install -g react-devtools
+
+安装完成后在命令行中执行`react-devtools`即可启动此工具：
+
+```
+react-devtools
+```
 
 
 
