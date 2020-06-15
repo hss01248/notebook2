@@ -26,3 +26,29 @@ https://cloud.google.com/apis
 
  https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide
 
+
+
+# jenkins
+
+任意一个界面url加上/api/json即可,
+
+比如: http://<servername>/job/xxx/api/json
+
+通过apiToken访问: 添加http头部
+
+Authorization: Basic base64(userId:apiToken)
+
+
+
+# gitlab
+
+```
+https://<servername>/api/v4/projects/<projectId>/repository/files/<文件名>/raw?ref=<分支名>&private_token=<token>
+```
+
+# nexus
+
+https://help.sonatype.com/repomanager3/rest-and-integration-api
+
+
+
