@@ -196,7 +196,15 @@ react-devtools
 
 
 
+# 发布到binary:
 
+https://juejin.im/post/5858cc37570c35006916b718
+
+
+
+各种包管理
+
+![image-20200616104526150](/Users/hss/Library/Application Support/typora-user-images/image-20200616104526150.png)
 
 
 
