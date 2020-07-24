@@ -26,7 +26,7 @@ https://github.com/davidmoten/rxjava2-extras 各种transformers和工具
 
 https://github.com/akarnokd/RxJavaExtensions
 
-https://github.com/android10/frodo2  logging [RxJava](https://github.com/ReactiveX/RxJava) [Observables](http://reactivex.io/documentation/observable.html) and [Subscribers](http://reactivex.io/RxJava/javadoc/rx/Subscriber.html) outputs on the logcat
+https://github.com/skyNet2017/frodo2  logging [RxJava](https://github.com/ReactiveX/RxJava) [Observables](http://reactivex.io/documentation/observable.html) and [Subscribers](http://reactivex.io/RxJava/javadoc/rx/Subscriber.html) outputs on the logcat
 
 
 
