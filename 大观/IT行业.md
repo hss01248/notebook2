@@ -26,7 +26,13 @@ https://blog.csdn.net/foruok/article/details/85980126
 
 ![image-20200727095635825](http://hss01248.tech/uPic/2020-07-27-09-56-36-image-20200727095635825.png)
 
-## 能力模型
+# 能力模型
+
+## 专业知识结构
+
+![img](https://pic1.zhimg.com/80/v2-c045bae0e41811d6bdf217d48f6bb1a2_1440w.jpg)
+
+
 
 ### 高潜程序员胜任力 CPT9+X™模型
 
@@ -35,10 +41,6 @@ https://www.sohu.com/a/146477234_692408
 ![img](http://img.mp.sohu.com/upload/20170606/87be1ab01fbd4d68a9b8b5b80f67e645_th.png)
 
 ![img](http://img.mp.sohu.com/upload/20170606/2a9405e7d10e4d5ca98e45a85b44626d_th.png)
-
-## 专业知识结构
-
-![img](https://pic1.zhimg.com/80/v2-c045bae0e41811d6bdf217d48f6bb1a2_1440w.jpg)
 
 
 
