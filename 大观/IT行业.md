@@ -1,3 +1,5 @@
+
+
 # 相关职业
 
 
@@ -102,8 +104,11 @@ https://blog.csdn.net/juwikuang/article/details/100550704
 
 ![2019年9月中国编程语言排行榜](https://cdn.jsdelivr.net/gh/hss01248/picbed/pic/20191007210103771.png)
 
-## 世界范围内
+# 世界范围内
 
-https://m.jjl.cn/article/520655.html
+https://zhuanlan.zhihu.com/p/62291539
 
-![程序員平均年薪 70 萬、40 歲後收入下滑？盡在 2019 程序員薪資報告](https://img.chainnews.com/material/images/299474e0c41514b4e32c666e915e44fc.jpg-article)
+https://insights.stackoverflow.com/survey/2019
+
+
+
