@@ -1,5 +1,17 @@
 # 如何将react native打包成一个aar
 
+# rn打包bundle
+
+```shell
+npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/com/your-company-name/app-package-name/src/main/assets/index.android.bundle --assets-dest android/com/your-company-name/app-package-name/src/main/res/
+或
+npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output index.android.bundle --assets-dest android/
+```
+
+
+
+
+
 > 一句话总结: 本地文件夹方式的maven依赖改成远程maven仓库依赖,同时rn的打包产物bundle文件放到子module的assets目录下. 
 
 
