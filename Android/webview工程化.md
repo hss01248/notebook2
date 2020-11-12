@@ -6,13 +6,26 @@
 
 # 概述
 
+## 预先阅读资料
+
+>  webview最常见的一些问题
+
+[Android开发：最全面、最易懂的Webview详解](https://www.jianshu.com/p/3c94ae673e2a)
+ [最全面总结 Android WebView与 JS 的交互方式](https://www.jianshu.com/p/345f4d8a5cfa)
+ [手把手教你构建 Android WebView 的缓存机制 & 资源预加载方案](https://www.jianshu.com/p/5e7075f4875f)
+ [你不知道的 Android WebView 使用漏洞](https://www.jianshu.com/p/3a345d27cd42)
+
 ## 玩好webview的前提
 
 > 了解一点web最最基础的知识
 
 ### html DOM树模型s
 
+> vs Android的view树
+
 ![DOM HTML tree](https://www.runoob.com/images/htmltree.gif)
+
+![image-20201112094944686](https://gitee.com/hss012489/picbed/raw/master/picgo/1605145789884-image-20201112094944686.jpg)
 
 ### JavaScript 浏览器对象模型   
 
@@ -252,13 +265,7 @@ mWebSettings.setAppCachePath(appCachePath);
 
 ## 重定向: 301,302..
 
-shouldOverideUrlLoading回调里,request.isRedirect=true时. 无法拿到重定向后的url.
-
-## ssl握手和ssl错误
-
-onSslError
-
-
+shouldOverideUrlLoading回调里,request.isRedirect=true时.
 
 ## 页面开始
 
@@ -267,6 +274,10 @@ onPageStart或shouldOverideUrlLoading
 ## 页面加载完成
 
 onPageFinished/onProgress(100)
+
+## 页面错误的兼容
+
+[WebView：onReceiveError的应用与变迁](https://blog.csdn.net/wjr1949/article/details/72312283)
 
 # js和native怎么相互调用,以及获取返回值
 
@@ -680,7 +691,29 @@ public static void invokeJsDebugPan(WebView webView){
 
 ### 如何在webview端进行证书校验
 
+* 建立ssl连接时校验
+* 证书被系统判定错误后再校验.-onReceivedSslError()
+
+
+
 ### google play关于https校验error的处理的要求
+
+![img](https://gitee.com/hss012489/picbed/raw/master/picgo/1605148456978-Center.jpg)
+
+谷歌不允许直接proceed,以下两种处理方式可任选其一:
+
+* 弹窗让用户选择是否继续请求(推荐)
+* 自己做证书校验.示例代码如下:
+
+
+
+证书错误后,再校验
+
+参考:[Android webview手动校验https证书（by 星空武哥）](https://blog.csdn.net/lsyz0021/article/details/54669914)
+
+![image-20201112103602006](https://gitee.com/hss012489/picbed/raw/master/picgo/1605148562108-image-20201112103602006.jpg)
+
+![image-20201112103647389](https://gitee.com/hss012489/picbed/raw/master/picgo/1605148607487-image-20201112103647389.jpg)
 
 ## cookie相关
 
@@ -692,11 +725,84 @@ public static void invokeJsDebugPan(WebView webView){
 
 ## web页面加载基本流程
 
+[web页面加载、解析、渲染过程](https://blog.csdn.net/weixin_30535843/article/details/96036521)
+
+![img](https://images2015.cnblogs.com/blog/825196/201703/825196-20170328150055436-1910402537.png)
 
 
-## 首屏时间优化
 
-### web离线包
+## 加载时间优化
+
+> 缓存文件,缓存webview对象
+
+### 优化webview的缓存管理
+
+系统缓存限制太大，实现缓存的主要方式是通过拦截webview的访问，然后实现自定义缓存，我把这种实现方式封装成库
+https://github.com/yale8848/CacheWebView
+
+### web离线包: 变远程为本地
+
+业界最常用的. 需要web端配合做差分包. Android下载后做差分合并,用到bsdiff.
+
+基本原理:
+
+复写shouldInterceptRequest方法,如果资源url对应的本地离线包文件存在,则读取本地文件,构建WebResourceResponse返回.
+
+```
+WebResourceResponse shouldInterceptRequest(WebView view,
+        WebResourceRequest request)
+        
+WebResourceResponse shouldInterceptRequest(WebView view,
+            String url)
+```
+
+### Android侧:延迟图片加载
+
+在加载前先阻塞加载图片
+
+```java
+settings.setBlockNetworkImage(true);
+```
+
+在WebView 渲染完成后，解除阻塞，加载图片。WebViewClient中:
+
+```java
+public void onPageFinished(WebView view, String url) {
+            settings.setBlockNetworkImage(false);
+            //判断webview是否加载了，图片资源
+            if (!settings.getLoadsImagesAutomatically()) {
+                //设置wenView加载图片资源
+                settings.setLoadsImagesAutomatically(true);
+            }
+            super.onPageFinished(view, url);
+        }
+
+```
+
+
+
+### 预初始化webview
+
+在Application预先初始化好WebView, 当第二次初始化WebView的时候速度就快多了
+
+### web侧:优化代码
+
+[web页面性能优化](https://blog.csdn.net/qq_41807645/article/details/80839757)
+
+# 参考和扩展阅读
+
+[Android开发：最全面、最易懂的Webview详解](https://www.jianshu.com/p/3c94ae673e2a)
+ [最全面总结 Android WebView与 JS 的交互方式](https://www.jianshu.com/p/345f4d8a5cfa)
+ [手把手教你构建 Android WebView 的缓存机制 & 资源预加载方案](https://www.jianshu.com/p/5e7075f4875f)
+ [你不知道的 Android WebView 使用漏洞](https://www.jianshu.com/p/3a345d27cd42)
+
+
+
+[关于webview与H5属性设置以及交互的总结](https://blog.csdn.net/u011200604/article/details/52767304)
+
+[Android Webview H5 秒开方案实现](https://mp.weixin.qq.com/s/XfBt_gTw0gN7tXzuyP4PTw)
+
+
 
 
 
