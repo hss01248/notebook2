@@ -368,9 +368,9 @@ public interface IPermissionRN {
     }
    
  //RN module:
-public class AkuPermissionModule extends ReactContextBaseJavaModule implements IPermissionRN {
+public class PermissionModule extends ReactContextBaseJavaModule implements IPermissionRN {
     IPermissionRN proxy;
-    public AkuPermissionModule(@Nonnull ReactApplicationContext reactContext) {
+    public PermissionModule(@Nonnull ReactApplicationContext reactContext) {
         super(reactContext);
         proxy = new RnProxyHandler<IPermissionRN>(new PermissionImpl(null,null))
                 .getProxy();
@@ -379,7 +379,7 @@ public class AkuPermissionModule extends ReactContextBaseJavaModule implements I
     @Nonnull
     @Override
     public String getName() {
-        return "AkuPermissionModule";
+        return "PermissionModule";
     }
     @ReactMethod
     @Override
