@@ -282,9 +282,88 @@ onPageFinished/onProgress(100)
 
 [WebView：onReceiveError的应用与变迁](https://blog.csdn.net/wjr1949/article/details/72312283)
 
+### input file文件选择适配
+
+暂时限定只选择图片或调用系统拍照功能
+
+//用到库: implementation('com.github.skyNet2017:TakePhoto:4.2.1')
+
+```java
+ @Override
+                    public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+                        TakePhotoUtil.startPickOne(AgentWebActivity.this, true, new TakeOnePhotoListener() {
+                            @Override
+                            public void onSuccess(String path) {
+                                Log.d(DebugWebChromeClientLogger.DEFAULT_TAG,"onShowFileChooser-path:"+path);
+                                Uri[] uris = new Uri[1];
+                                uris[0] = Uri.fromFile(new File(path));
+                                filePathCallback.onReceiveValue(uris);
+                            }
+
+                            @Override
+                            public void onFail(String path, String msg) {
+                                Log.d(DebugWebChromeClientLogger.DEFAULT_TAG,"onShowFileChooser-onFail:"+path);
+                                filePathCallback.onReceiveValue(null);
+                            }
+
+                            @Override
+                            public void onCancel() {
+                                Log.d(DebugWebChromeClientLogger.DEFAULT_TAG,"onShowFileChooser-onCancel:");
+                                filePathCallback.onReceiveValue(null);
+                            }
+                        });
+                        return true;
+                    }
+```
+
+```html
+//html测试代码
+<div>
+    <label for="avatar">Choose image to upload</label>
+    <input type="file"  id="avatar" name="avatar"
+           accept="image/png, image/jpeg" onchange="function handleFiles(files) {
+                var imgSrcI = getObjectURL(files[0]);
+                  console.log('uri:'+imgSrcI)
+               document.getElementById('avatar_img').src = imgSrcI;
+               console.log('files:'+files[0].name)
+                console.log('files:'+files[0].size)
+                document.getElementById('avatar_txt').innerText = 'uri is : '+imgSrcI+', \n'+(files[0].size/1024).toFixed(2)+'kB';
+                console.log('files:'+files[0].text())
+                console.log('files:'+files[0].stream.toString())
+
+
+           }
+           handleFiles(this.files)"/>
+</div>
+<div>
+    <a id="avatar_txt"></a><br>
+    <img id="avatar_img">
+</div>
+```
+
+
+
+
+
+#### 测试结果
+
+Log
+
+![image-20201119192331382](https://gitee.com/hss012489/picbed/raw/master/picgo/1605785011462-image-20201119192331382.jpg)
+
+![image-20201119191853544](https://gitee.com/hss012489/picbed/raw/master/picgo/1605784740154-image-20201119191853544.jpg)
+
+## 
+
+
+
 # js和native怎么相互调用,以及获取返回值
 
 > 本质上就是java和javascript怎么通信
+
+
+
+//chromclient回调处理:
 
 ## js调用native
 
@@ -309,9 +388,9 @@ onPageFinished/onProgress(100)
 
 ```java
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-    webview.evaluateJs("javascript:"+jscode, callback);//4.4以上,可以设置webview调用js方法后的回调.
+    webview.evaluateJavascript("javascript:"+jscode, callback);//4.4以上,可以设置webview调用js方法后的回调.
 } else {
-    webview.loadJs("javascript:"+jscode);
+    webview.loadUrl("javascript:"+jscode);
 }
 ```
 
@@ -730,7 +809,7 @@ public static void invokeJsDebugPan(WebView webView){
 
 [web页面加载、解析、渲染过程](https://blog.csdn.net/weixin_30535843/article/details/96036521)
 
-![img](https://images2015.cnblogs.com/blog/825196/201703/825196-20170328150055436-1910402537.png)
+![img](https://gitee.com/hss012489/picbed/raw/master/picgo/1605153058090-825196-20170328150055436-1910402537.jpg)
 
 
 
@@ -740,7 +819,7 @@ public static void invokeJsDebugPan(WebView webView){
 
 ### 优化webview的缓存管理
 
-系统缓存限制太大，实现缓存的主要方式是通过拦截webview的访问，然后实现自定义缓存，我把这种实现方式封装成库
+系统缓存限制太大，实现缓存的主要方式是通过拦截webview的访问，然后实现自定义缓存，把这种实现方式封装成库
 https://github.com/yale8848/CacheWebView
 
 ### web离线包: 变远程为本地
