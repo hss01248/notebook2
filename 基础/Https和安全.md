@@ -1,6 +1,6 @@
 
 
-# Https和安全
+# Https
 
 
 
@@ -503,7 +503,25 @@ android:networkSecurityConfig="@xml/network_security_config_httputil"
 
 
 
+# 后续发展:Http3
 
+参考  https://juejin.cn/post/6908522467107536903
+
+HTTP/2因为底层使用的传输层协议仍然是TCP，所以他存在着TCP队头阻塞、TCP握手延时长以及协议僵化等问题。
+
+这导致HTTP/2虽然使用了多路复用、二进制分帧等技术，但是仍然存在着优化空间
+
+Http3/QUIC协议有以下特点：
+
+- 基于UDP的传输层协议：它使用UDP端口号来识别指定机器上的特定服务器。
+- 可靠性：虽然UDP是不可靠传输协议，但是QUIC在UDP的基础上做了些改造，使得**他提供了和TCP类似的可靠性**。它提供了数据包重传、拥塞控制、调整传输节奏以及其他一些TCP中存在的特性。
+- 实现了无序、并发字节流：**QUIC的单个数据流可以保证有序交付，但多个数据流之间可能乱序**，这意味着单个数据流的传输是按序的，但是多个数据流中接收方收到的顺序可能与发送方的发送顺序不同！
+- 快速握手：**QUIC提供0-RTT和1-RTT的连接建立**
+- 使用TLS 1.3传输层安全协议：与更早的TLS版本相比，TLS 1.3有着很多优点，但使用它的最主要原因是其握手所花费的往返次数更低，从而能降低协议的延迟。
+
+![img](https://gitee.com/hss012489/picbed/raw/master/picgo/1608703621668-109e1e81438643d3aa50d8dfed33b7c6~tplv-k3u1fbpfcp-zoom-1.image)
+
+![img](https://gitee.com/hss012489/picbed/raw/master/picgo/1608703536948-0470f5d504444e4093c109939aa77b03~tplv-k3u1fbpfcp-zoom-1.image)
 
 # 参考
 
