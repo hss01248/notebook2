@@ -8,7 +8,7 @@
 
 ## 整个https连接到断开连接的流程图
 
-![img](https://user-gold-cdn.xitu.io/2018/5/6/1633532f95052afd?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+![image-20201223141732045](https://gitee.com/hss012489/picbed/raw/master/picgo/1608704252120-image-20201223141732045.jpg)
 
 ## https单向认证流程图
 
@@ -519,9 +519,9 @@ Http3/QUIC协议有以下特点：
 - 快速握手：**QUIC提供0-RTT和1-RTT的连接建立**
 - 使用TLS 1.3传输层安全协议：与更早的TLS版本相比，TLS 1.3有着很多优点，但使用它的最主要原因是其握手所花费的往返次数更低，从而能降低协议的延迟。
 
-![img](https://gitee.com/hss012489/picbed/raw/master/picgo/1608703621668-109e1e81438643d3aa50d8dfed33b7c6~tplv-k3u1fbpfcp-zoom-1.image)
+![image-20201223141427961](https://gitee.com/hss012489/picbed/raw/master/picgo/1608704068045-image-20201223141427961.jpg)
 
-![img](https://gitee.com/hss012489/picbed/raw/master/picgo/1608703536948-0470f5d504444e4093c109939aa77b03~tplv-k3u1fbpfcp-zoom-1.image)
+![0470f5d504444e4093c109939aa77b03_tplv-k3u1fbpfcp-zoom-1](https://gitee.com/hss012489/picbed/raw/master/picgo/1608704190732-0470f5d504444e4093c109939aa77b03_tplv-k3u1fbpfcp-zoom-1.gif)
 
 # 参考
 
