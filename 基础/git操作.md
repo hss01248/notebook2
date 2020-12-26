@@ -1,5 +1,26 @@
 # git
 
+# 配置
+
+## 代理
+
+```c
+git config --global http.proxy http://127.0.0.1:41091
+
+git config --global https.proxy https://127.0.0.1:41091
+
+git config --global --unset http.proxy
+
+git config --global --unset https.proxy
+
+
+git config --global http.proxy 'socks5://127.0.0.1:1080'
+
+git config --global https.proxy 'socks5://127.0.0.1:1080'
+```
+
+
+
 # rebase操作
 
 > 在Android studio或任意jetbrains的IDE上
