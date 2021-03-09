@@ -20,7 +20,7 @@ packageManager.getInstallerPackageName(DeviceReporter.app.getPackageName());
 或者使用: 
 
 try {
-    packageManager.getInstallSourceInfo(DeviceReporter.app.getPackageName());
+   installSourceInfo =  packageManager.getInstallSourceInfo(DeviceReporter.app.getPackageName());
     //packageManager.getPackageInstaller().
 } catch (PackageManager.NameNotFoundException e) {
     e.printStackTrace();
