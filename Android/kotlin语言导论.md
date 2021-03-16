@@ -300,6 +300,8 @@ add(-5, 6, Math.abs);
 
 
 
+# 最重要的: 练习,动手写
+
 # 官方文档
 
 [kotlin中文文档](https://www.kotlincn.net/docs/reference/)
