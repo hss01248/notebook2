@@ -6,7 +6,7 @@
 
 [未来取代 JPEG 的，可能是 Android 12 支持的新图片格式](https://tech.ifeng.com/c/84IJDmNM91u)
 
-# # 描述
+#  描述
 
 HEIF因为专利问题已被时代抛弃
 
