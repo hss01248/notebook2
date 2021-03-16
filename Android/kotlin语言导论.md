@@ -103,6 +103,22 @@ Android KTX是包含在 `Android Jetpack` 及其他 `Android` 库中的一组 `K
 
 [android工程java项目如何转kotlin](https://zhuanlan.zhihu.com/p/259968157)
 
+右键:
+
+![image-20210316141950229](https://gitee.com/hss012489/picbed/raw/master/picgo/1615875590286-image-20210316141950229.jpg)
+
+![image-20210316142027444](https://gitee.com/hss012489/picbed/raw/master/picgo/1615875627493-image-20210316142027444.jpg)
+
+![image-20210316142142141](https://gitee.com/hss012489/picbed/raw/master/picgo/1615875702187-image-20210316142142141.jpg)
+
+
+
+转换前后对比:
+
+![image-20210316143502335](https://gitee.com/hss012489/picbed/raw/master/picgo/1615876502383-image-20210316143502335.jpg)
+
+![image-20210316143404864](https://gitee.com/hss012489/picbed/raw/master/picgo/1615876444915-image-20210316143404864.jpg)
+
 # 如何学习一门编程语言?
 
 >  重视语言特性,而不是语言
