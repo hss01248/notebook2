@@ -14,7 +14,7 @@
 
 # apk被谁安装的?
 
-```
+```java
 packageManager.getInstallerPackageName(DeviceReporter.app.getPackageName());
 
 或者使用: 
@@ -36,13 +36,26 @@ try {
 ```java
 public final class InstallSourceInfo implements Parcelable {
 
+  
+  //安装是被谁发起的: The name of the package that requested the installation, or null if not available.
     @Nullable private final String mInitiatingPackageName;
 
     @Nullable private final SigningInfo mInitiatingPackageSigningInfo;
-
+/**
+     * The name of the package on behalf of which the initiating package requested the installation,
+     * or null if not available.
+     * <p>
+     * For example if a downloaded APK is installed via the Package Installer this could be the
+     * app that performed the download. This value is provided by the initiating package and not
+     * verified by the framework.
+     * <p>
+     * Note that the {@code InstallSourceInfo} returned by
+     * {@link PackageManager#getInstallSourceInfo(String)} will not have this information
+     * available unless the calling application holds the INSTALL_PACKAGES permission.
+     */
     @Nullable private final String mOriginatingPackageName;
 
-    @Nullable private final String mInstallingPackageName;
+    @Nullable private final String mInstallingPackageName;//安装是被哪个apk安装器执行的
 ```
 
 

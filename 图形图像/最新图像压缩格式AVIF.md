@@ -61,3 +61,72 @@ https://github.com/programmingisart/avif_viewer_android
 https://github.com/programmingisart/avif_viewer_android
 
 将avif文件转换成高质量的jpg文件,然后用Android Bitmap api加载
+
+
+
+# 对比demo
+
+https://github.com/hss01248/avif-android
+
+### 效果图
+
+单反拍摄的图,放大到100%后对比:
+
+![Screenshot_20210401_102002_com.jackco.avifencoder(1)](https://gitee.com/hss012489/picbed/raw/master/picgo/1617261222926-Screenshot_20210401_102002_com.jackco.avifencoder(1).jpg)
+
+### avif的额外功效: 
+
+磨平jpeg压缩产生的不合理色块
+
+下图avif是以质量80的jpg图为源图来进行压缩的.
+
+可以看到源图上有色块,avif上已经没有了
+
+![image-20210401154837974](https://gitee.com/hss012489/picbed/raw/master/picgo/1617263318011-image-20210401154837974.jpg)
+
+# 文件格式分析
+
+### 文件头:
+
+![image-20210401144211574](https://gitee.com/hss012489/picbed/raw/master/picgo/1617259336745-image-20210401144211574.jpg)
+
+![image-20210401144239633](https://gitee.com/hss012489/picbed/raw/master/picgo/1617259359660-image-20210401144239633.jpg)
+
+
+
+看起来,文件格式写在前8个字节,ftypavif
+
+exif信息已预留保存区:mata开始到数据区结束
+
+数据区开始标识: mdat->6D 64 61 74 12 00 0A
+
+![image-20210401145635280](https://gitee.com/hss012489/picbed/raw/master/picgo/1617260195310-image-20210401145635280.jpg)
+
+再看一个经过exiftool拷贝exif的图:
+
+```shell
+/usr/local/bin/exiftool -TagsFromFile /Users/hss/Downloads/IMG_20210301_173148441617248922924.jpg /Users/hss/Downloads/IMG_20210301_17314844-q1-25-q2-36.avif
+```
+
+![image-20210401145810837](https://gitee.com/hss012489/picbed/raw/master/picgo/1617260290864-image-20210401145810837.jpg)
+
+
+
+## 文件尾:
+
+并无特征. 没有像jpg那样的固定ffd9的结束标识.
+
+![image-20210401144929339](https://gitee.com/hss012489/picbed/raw/master/picgo/1617259769371-image-20210401144929339.jpg)
+
+![image-20210401144948933](https://gitee.com/hss012489/picbed/raw/master/picgo/1617259788960-image-20210401144948933.jpg)
+
+
+
+# 待解决问题
+
+* 蓝绿色偏色问题: 根据亮度推导色度,算法本身缺陷?
+* exif读写问题: 
+
+偏色情况: 蓝绿变亮,黄色变暗:
+
+![image-20210401155923303](https://gitee.com/hss012489/picbed/raw/master/picgo/1617263963342-image-20210401155923303.jpg)
