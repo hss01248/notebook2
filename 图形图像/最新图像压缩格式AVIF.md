@@ -1,5 +1,19 @@
 # 最新图像压缩格式 AVIF
 
+
+
+# 官方
+
+文档: https://aomediacodec.github.io/av1-avif/
+
+源码: https://github.com/AOMediaCodec/libavif
+
+格式登记: https://www.iana.org/assignments/media-types/image/avif
+
+
+
+
+
 # 相关介绍
 
 [AVIF图片格式简介](https://www.zhangxinxu.com/wordpress/2020/04/avif-image-format/)
@@ -34,13 +48,25 @@ n次重复压缩对比:
 
 https://github.com/AOMediaCodec/libavif
 
-目前不支持质量设置. 
-
 上面的效果比对的思路是: 一张高清大图用avif格式压制后,看文件大小.
 
 然后原图用jpeg压缩到同等大小,对比效果.
 
 
+
+## 压缩质量的说明:
+
+**Change the AVIF quality setting**
+Go-avif uses the libaom quality setting (called “Q mode”), which starts at 0 (lossless) and goes up to 63 (worst quality). If not specified, go-avif sets the compression quality to 25. Here is an example of AVIF encoding with a slightly better quality:
+
+On Windows:
+`avif-win-x64.exe -e example.JPG -o example-q20.avif -q 20`
+
+
+
+各平台的一些工具:
+
+https://libre-software.net/avif-test/
 
 # web端代码库
 
@@ -86,6 +112,18 @@ https://github.com/hss01248/avif-android
 
 # 文件格式分析
 
+avif与heif文件格式保持兼容. 
+
+下面是heif的格式:
+
+[HEIF/heic图片文件解析](https://zhuanlan.zhihu.com/p/35847861)
+
+![img](https://gitee.com/hss012489/picbed/raw/master/picgo/1617344063552-v2-1221190c851c7c6b0d220a0c76bd6db3_720w.jpg)
+
+看avif:
+
+![image-20210402141616696](https://gitee.com/hss012489/picbed/raw/master/picgo/1617344176735-image-20210402141616696.jpg)
+
 ### 文件头:
 
 ![image-20210401144211574](https://gitee.com/hss012489/picbed/raw/master/picgo/1617259336745-image-20210401144211574.jpg)
@@ -125,8 +163,34 @@ exif信息已预留保存区:mata开始到数据区结束
 # 待解决问题
 
 * 蓝绿色偏色问题: 根据亮度推导色度,算法本身缺陷?
-* exif读写问题: 
+* exif读写问题:  how to write tiff format exif data into a avif file?
 
 偏色情况: 蓝绿变亮,黄色变暗:
 
 ![image-20210401155923303](https://gitee.com/hss012489/picbed/raw/master/picgo/1617263963342-image-20210401155923303.jpg)
+
+# oritation的处理
+
+https://zpl.fi/exif-orientation-in-different-formats/
+
+# 探究:exif拷贝: 直接从jpeg拷贝一份exif信息到avif中
+
+```
+//meta:  6d 65 74 64
+//mdat : 6d 64 61 74
+删除区间内容,发现图片无法打开.
+```
+
+[Exif文件格式描述](https://blog.csdn.net/huang546213693/article/details/46503361)
+
+exif查看: https://exif.tuchong.com/
+
+![image-20210402150500236](https://gitee.com/hss012489/picbed/raw/master/picgo/1617347100277-image-20210402150500236.jpg)
+
+
+
+## 直接看源码是怎么写exif的:
+
+https://github.com/AOMediaCodec/libavif/blob/master/src/write.c
+
+![image-20210402165504505](https://gitee.com/hss012489/picbed/raw/master/picgo/1617353704566-image-20210402165504505.jpg)
