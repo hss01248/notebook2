@@ -10,6 +10,8 @@
 
 格式登记: https://www.iana.org/assignments/media-types/image/avif
 
+google blog: https://jakearchibald.com/2020/avif-has-landed/
+
 
 
 
