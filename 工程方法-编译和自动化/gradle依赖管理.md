@@ -113,3 +113,27 @@ implementation('org.example:library:1.0.0'){
 
 
 
+# 查看项目所有依赖:
+
+```shell
+./gradlew :app:dependencies --configuration releaseRuntimeClasspath > old.txt
+```
+
+![image-20210524194717499](https://gitee.com/hss012489/picbed/raw/master/picgo/1621856837601-image-20210524194717499.jpg)
+
+几个release版本之间依赖的差异,可以使用:
+
+https://github.com/JakeWharton/dependency-tree-diff
+
+配合gradle脚本,输出报告
+
+比如:
+
+```shell
+#!/bin/bash
+set -e
+echo "生成依赖树到文件dependencies.txt中,每次建release时,以及发版后merge到master之前运行此脚本一次,便于通过git追踪各版本依赖的变化"
+./gradlew :app:dependencies --configuration releaseRuntimeClasspath > dependencies.txt
+```
+
+![image-20210524200502542](https://gitee.com/hss012489/picbed/raw/master/picgo/1621857902588-image-20210524200502542.jpg)
