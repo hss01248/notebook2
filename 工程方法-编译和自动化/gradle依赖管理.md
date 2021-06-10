@@ -137,3 +137,11 @@ echo "生成依赖树到文件dependencies.txt中,每次建release时,以及发�
 ```
 
 ![image-20210524200502542](https://gitee.com/hss012489/picbed/raw/master/picgo/1621857902588-image-20210524200502542.jpg)
+
+
+
+# 脚本里动态增删依赖
+
+https://juejin.cn/post/6971807367184777246
+
+https://github.com/hss01248/MyDataStore/blob/script/test.gradle
