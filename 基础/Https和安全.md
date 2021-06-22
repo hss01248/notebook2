@@ -393,9 +393,11 @@ private static KeyManager[] prepareKeyManager(InputStream bksFile, String passwo
 
 ## 忽略证书校验,通过所有证书
 
-HostnameVerifier空实现,且
+TrustManager里的checkServerTrusted()方法空实现
 
-TrustManager里的checkServerTrusted()方法也空实现
+HostnameVerifier空实现
+
+
 
 ## 使用客户端内置的一个服务端根证书来校验握手时服务端过来的证书的有效性
 
@@ -522,6 +524,30 @@ Http3/QUIC协议有以下特点：
 ![image-20201223141427961](https://gitee.com/hss012489/picbed/raw/master/picgo/1608704068045-image-20201223141427961.jpg)
 
 ![0470f5d504444e4093c109939aa77b03_tplv-k3u1fbpfcp-zoom-1](https://gitee.com/hss012489/picbed/raw/master/picgo/1608704190732-0470f5d504444e4093c109939aa77b03_tplv-k3u1fbpfcp-zoom-1.gif)
+
+# 抓包
+
+## 工具
+
+Windows: fiddler
+
+Mac: chales
+
+以上工具要打开ssl抓包功能,普通的就可以抓包.
+
+Android7以上,需要app本身的网络配置打开接受.
+
+
+
+如果锁定了公钥/证书,那么以上都无法抓包.
+
+可以使用frida,有脚本可用
+
+https://github.com/r0ysue/r0capture
+
+
+
+
 
 # 参考
 
