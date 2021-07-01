@@ -1145,7 +1145,11 @@ https://sea-region.github.com/aicareles/AopArms
 
 https://sea-region.github.com/fengzhizi715/SAF-AOP
 
- 
+
+
+# hacker
+
+https://github.com/CreditTone/hooker 基于frida实现的逆向工具包 
 
  
 
