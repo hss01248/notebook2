@@ -2,6 +2,16 @@
 
 
 
+经典文章:
+
+https://juejin.cn/post/6906662233783140360
+
+elk收集:
+
+https://juejin.cn/post/6844904196672585741
+
+
+
 https://www.bilibili.com/video/BV1x4411Q7Jh
 
 ![Image](https://gitee.com/hss012489/picbed/raw/master/picgo/Image.png.png)
