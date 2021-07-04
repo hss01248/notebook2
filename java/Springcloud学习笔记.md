@@ -194,3 +194,20 @@ eureka client自带ribbon
 
 ![image-20210704201219578](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210704201219578.png.png)
 
+#### 2.2.2 openFeign
+
+![image-20210705071111229](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705071111229.png.png)
+
+![image-20210705071152770](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705071152770.png.png)
+
+![image-20210705071259694](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705071259694.png.png)
+
+
+
+![image-20210705072242678](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705072242678.png.png)
+
+![image-20210705072324231](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705072324231.png.png)
+
+![image-20210705072446543](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705072446543.png.png)
+
+![image-20210705073000704](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705073000704.png.png)
