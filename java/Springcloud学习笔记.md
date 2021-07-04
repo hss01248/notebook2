@@ -211,3 +211,15 @@ eureka client自带ribbon
 ![image-20210705072446543](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705072446543.png.png)
 
 ![image-20210705073000704](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705073000704.png.png)
+
+![image-20210705073656789](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705073656789.png.png)
+
+![image-20210705073801397](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705073801397.png.png)
+
+日志级别
+
+![image-20210705073844099](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705073844099.png.png)
+
+![image-20210705073911041](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705073911041.png.png)
+
+![image-20210705074010012](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705074010012.png.png)
