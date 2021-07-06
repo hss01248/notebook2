@@ -223,3 +223,40 @@ eureka client自带ribbon
 ![image-20210705073911041](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705073911041.png.png)
 
 ![image-20210705074010012](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210705074010012.png.png)
+
+
+
+### 2.3 服务熔断,降级,限流
+
+#### 2.3..1 Hytrix
+
+![image-20210706223230656](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210706223230656.png.png)
+
+![image-20210706222205127](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210706222205127.png.png)
+
+
+
+![image-20210706223650316](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210706223650316.png.png)
+
+
+
+![image-20210706223801138](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210706223801138.png.png)
+
+![image-20210706223347706](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210706223347706.png.png)
+
+![image-20210706223720526](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210706223720526.png.png)
+
+![image-20210706224209375](https://gitee.com/hss012489/picbed/raw/master/picgo/image-20210706224209375.png.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
