@@ -1071,6 +1071,10 @@ https://github.com/hackware1993/injor
 
 # Aop:
 
+## 一个asm实现的方法拦截器
+
+https://github.com/zhuguohui/MehodInterceptor
+
 ## XAOP
 
 https://github.com/xuexiangjys/XAOP
