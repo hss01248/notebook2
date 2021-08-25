@@ -1,0 +1,176 @@
+[
+  {
+    "status": "COMPLETE",
+    "method": "GET",
+    "protocolVersion": "HTTP/2.0",
+    "scheme": "https",
+    "host": "api.weibo.cn",
+    "port": null,
+    "actualPort": 443,
+    "path": "/2/page/get_search_suggest",
+    "query": "networktype=wifi&extparam=bendi&launchid=10000365--x&orifid=231619%24%242310360030_8008644030000000000_%E6%B7%B1%E5%9C%B3%24%242306860024_113.948466_22.526403_8008644030000000000&uicode=10000003&ul_hid=fd07412c-f469-4934-856b-14fd581d598b&ul_sid=bccea849-2b5a-44f3-8ff0-82fcd143b2fa&page_id=100303type%3D555%26q%3D%E4%B9%9D%E5%AF%A8%E6%B2%9F%26t%3D3&moduleID=700&featurecode=10000085&wb_version=5152&lcardid=2306860024_113.948466_22.526403_8008644030000000000_-_cityroam_search&c=android&s=89ee241b&ft=0&ua=Xiaomi-Redmi%20K30__weibo__11.8.2__android__android11&wm=9847_0002&aid=01A-DYbiQ4G26j6nA2ORRvqpGp5044Y_PuzxF20-ZjZ7CnWdU.&fid=100303type%3D555%26q%3D%E4%B9%9D%E5%AF%A8%E6%B2%9F%26t%3D3&v_f=2&v_p=89&from=10B8295010&gsid=_2A25MImkdDeRxGeBK71cY8CjNyTqIHXVtdvvVrDV6PUJbkdAKLXDkkWpNR7ugsWE0lTiJpkYqY9ZA1M0p0SOsL_he&lang=zh_CN&lfid=2306860024_113.948466_22.526403_8008644030000000000&skin=default&count=20&oldwm=9847_0002&sflag=1&wb_search_suggest_cardlist_enable=1&oriuicode=10000010_10000327_10000011&luicode=10000011&android_id=a89a8baa56c9e75c&ul_ctime=1629888279349&cum=CCE0B3B1",
+    "tunnel": false,
+    "keptAlive": true,
+    "webSocket": false,
+    "remoteAddress": "api.weibo.cn/180.149.153.242",
+    "clientAddress": "/10.0.201.30",
+    "clientPort": 42588,
+    "times": {
+      "start": "2021-08-25T18:44:40.704+08:00",
+      "requestBegin": "2021-08-25T18:44:40.705+08:00",
+      "requestComplete": "2021-08-25T18:44:40.706+08:00",
+      "responseBegin": "2021-08-25T18:44:40.817+08:00",
+      "end": "2021-08-25T18:44:40.818+08:00"
+    },
+    "durations": {
+      "total": 113,
+      "dns": null,
+      "connect": null,
+      "ssl": null,
+      "request": 1,
+      "response": 1,
+      "latency": 111
+    },
+    "speeds": {
+      "overall": "10716",
+      "request": "888000",
+      "response": "323000"
+    },
+    "totalSize": "1211",
+    "ssl": {
+      "protocol": "TLSv1.2",
+      "cipherSuite": "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+    },
+    "alpn": {
+      "protocol": "h2"
+    },
+    "request": {
+      "sizes": {
+        "headers": 888,
+        "body": 0
+      },
+      "mimeType": null,
+      "charset": null,
+      "contentEncoding": null,
+      "header": {
+        "headers": [
+          {
+            "name": ":method",
+            "value": "GET"
+          },
+          {
+            "name": ":path",
+            "value": "/2/page/get_search_suggest?networktype=wifi&extparam=bendi&launchid=10000365--x&orifid=231619%24%242310360030_8008644030000000000_%E6%B7%B1%E5%9C%B3%24%242306860024_113.948466_22.526403_8008644030000000000&uicode=10000003&ul_hid=fd07412c-f469-4934-856b-14fd581d598b&ul_sid=bccea849-2b5a-44f3-8ff0-82fcd143b2fa&page_id=100303type%3D555%26q%3D%E4%B9%9D%E5%AF%A8%E6%B2%9F%26t%3D3&moduleID=700&featurecode=10000085&wb_version=5152&lcardid=2306860024_113.948466_22.526403_8008644030000000000_-_cityroam_search&c=android&s=89ee241b&ft=0&ua=Xiaomi-Redmi%20K30__weibo__11.8.2__android__android11&wm=9847_0002&aid=01A-DYbiQ4G26j6nA2ORRvqpGp5044Y_PuzxF20-ZjZ7CnWdU.&fid=100303type%3D555%26q%3D%E4%B9%9D%E5%AF%A8%E6%B2%9F%26t%3D3&v_f=2&v_p=89&from=10B8295010&gsid=_2A25MImkdDeRxGeBK71cY8CjNyTqIHXVtdvvVrDV6PUJbkdAKLXDkkWpNR7ugsWE0lTiJpkYqY9ZA1M0p0SOsL_he&lang=zh_CN&lfid=2306860024_113.948466_22.526403_8008644030000000000&skin=default&count=20&oldwm=9847_0002&sflag=1&wb_search_suggest_cardlist_enable=1&oriuicode=10000010_10000327_10000011&luicode=10000011&android_id=a89a8baa56c9e75c&ul_ctime=1629888279349&cum=CCE0B3B1"
+          },
+          {
+            "name": ":authority",
+            "value": "api.weibo.cn"
+          },
+          {
+            "name": ":scheme",
+            "value": "https"
+          },
+          {
+            "name": "authorization",
+            "value": "WB-SUT _2A95MImkdDeRxGeBK71cY8CjNyTqIHXVtdvvVrDV6PUJbkdAKLUP1kWpNR7ugsSWopWfZ0lYUvyVMOB6MS38TeQOz"
+          },
+          {
+            "name": "user-agent",
+            "value": "Redmi K30_11_weibo_11.8.2_android"
+          },
+          {
+            "name": "x-log-uid",
+            "value": "6445906126"
+          },
+          {
+            "name": "x-sessionid",
+            "value": "8e7f79be-293a-400d-9a3f-2f8555a832a0"
+          },
+          {
+            "name": "x-validator",
+            "value": "x9sAi464bd7bIsj9pNfjKfaVu/W/5+VewGwCciUugQk="
+          },
+          {
+            "name": "accept-encoding",
+            "value": "gzip"
+          }
+        ]
+      }
+    },
+    "response": {
+      "status": 200,
+      "sizes": {
+        "headers": 271,
+        "body": 52
+      },
+      "mimeType": "application/json",
+      "charset": "utf-8",
+      "contentEncoding": "gzip",
+      "header": {
+        "headers": [
+          {
+            "name": ":status",
+            "value": "200"
+          },
+          {
+            "name": "server",
+            "value": "nginx"
+          },
+          {
+            "name": "date",
+            "value": "Wed, 25 Aug 2021 10:44:40 GMT"
+          },
+          {
+            "name": "content-type",
+            "value": "application/json;charset=utf-8"
+          },
+          {
+            "name": "vary",
+            "value": "Accept-Encoding"
+          },
+          {
+            "name": "x-powered-by",
+            "value": "PHP/7.4.5"
+          },
+          {
+            "name": "x-error-code",
+            "value": "0"
+          },
+          {
+            "name": "x-log-uid",
+            "value": "6445906126"
+          },
+          {
+            "name": "x-validator",
+            "value": "g3NpyatxVgoWPHwKXF0PCPA7rXSeFo2uvy7N2n70CfQ="
+          },
+          {
+            "name": "sora",
+            "value": "1"
+          },
+          {
+            "name": "proc_node",
+            "value": "v7nocore-2-5d4c9f6b96-6t22b"
+          },
+          {
+            "name": "content-encoding",
+            "value": "gzip"
+          },
+          {
+            "name": "ssl_node",
+            "value": "ssl-027.mweibo.yf.intra.weibo.cn"
+          },
+          {
+            "name": "lb",
+            "value": "180.149.153.242"
+          }
+        ]
+      },
+      "body": {
+        "text": "[\"九寨沟\",[{\"desc\":\"九寨沟县\"}]]",
+        "charset": "utf-8",
+        "decoded": true
+      }
+    }
+  }
+]
