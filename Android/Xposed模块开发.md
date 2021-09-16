@@ -22,3 +22,8 @@ magisk+ LSPosed
 
 https://github.com/LSPosed/LSPosed/wiki/%E7%AE%80%E4%BB%8B
 
+
+
+# 一些代码/工具参考
+
+https://github.com/w296488320/XposedOkHttpCat
