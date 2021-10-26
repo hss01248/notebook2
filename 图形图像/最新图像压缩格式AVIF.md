@@ -245,11 +245,18 @@ https://github.com/AOMediaCodec/libavif/blob/master/src/write.c
 * 商户上传的商品图
 * 用户提交的评价图
 
-客户端使用so/c引入支持,web使用js引入支持. app内web使用jpg原图
+客户端使用so/c引入支持,web使用js引入支持. app内web使用jpg图
 
-oss存储jpg图
+oss存储jpg图+avif图(大图小图)
 
 cdn: 使用avif转换. 如果不支持,则oss存储avif原图和小图.
 
 
 
+## 在电商图片上的对比
+
+![image-20211015095652137](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/1634263012178-image-20211015095652137.jpg)
+
+
+
+![image-20211015095449752](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/1634262967775-image-20211015095449752.jpg)
