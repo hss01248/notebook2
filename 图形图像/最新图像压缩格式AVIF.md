@@ -96,6 +96,10 @@ https://github.com/programmingisart/avif_viewer_android
 
 https://github.com/hss01248/avif-android
 
+app下载试用:
+
+![QRCode_420](QRCode_420.png)
+
 ### 效果图
 
 单反拍摄的图,放大到100%后对比:
@@ -196,3 +200,63 @@ exif查看: https://exif.tuchong.com/
 https://github.com/AOMediaCodec/libavif/blob/master/src/write.c
 
 ![image-20210402165504505](https://gitee.com/hss012489/picbed/raw/master/picgo/1617353704566-image-20210402165504505.jpg)
+
+
+
+# 分析
+
+## 优势
+
+从上面的分析来看,AVIF具有非常大的节省流量/文件大小的优势.对于手机拍照可压缩至1/3-1/6, 对于设计图(纯色块较多)可压缩到1/6-1/20.
+
+无版权问题
+
+## 劣势
+
+* 压缩耗时比jpg高很多,为秒级.0.5s-15s不等.
+* 未普及,各平台均需要引入第三方库支持. 
+* 第三方库丰富程度很低. 
+* c源码还在不断优化中. 不排除非兼容性更新的可能性.
+
+## 各平台第三方库现状
+
+> 整体上来说属于发展的早期阶段
+
+* web: [avif.js](https://github.com/Kagami/avif.js) 支持解码. 是否支持编码? 是否支持在Android ios内部的webview运行?
+* Android [AndroidGlideAvifDecoder](https://github.com/link-u/AndroidGlideAvifDecoder) 支持使用glide加载. Rn使用fresco需要额外自定义fresco解码器来适配. 库较大,近3M
+* iOS ? 未找到
+* java后台: 有go/rust/python实现的库,可部署微服务调用其编解码功能.
+* 阿里云/aws 的lambda表达式(python)  [pillow-avif-plugin](https://github.com/fdintino/pillow-avif-plugin) 未试用
+
+
+
+## 第三方cdn的支持度
+
+* 阿里云   不支持
+* 七牛  不支持
+* aws ?
+* Akamai    [Support AVIF image format - Experimental 2021-04-07](https://learn.akamai.com/en-us/release_notes/web_performance/image_and_video_manager_10/)
+* 腾讯云
+
+## 电商项目应用AVIF可行性分析
+
+电商里图片主要有两部分来源:
+
+* 商户上传的商品图
+* 用户提交的评价图
+
+客户端使用so/c引入支持,web使用js引入支持. app内web使用jpg图
+
+oss存储jpg图+avif图(大图小图)
+
+cdn: 使用avif转换. 如果不支持,则oss存储avif原图和小图.
+
+
+
+## 在电商图片上的对比
+
+![image-20211015095652137](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/1634263012178-image-20211015095652137.jpg)
+
+
+
+![image-20211015095449752](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/1634262967775-image-20211015095449752.jpg)
