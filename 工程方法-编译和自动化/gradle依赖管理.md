@@ -127,6 +127,8 @@ https://github.com/JakeWharton/dependency-tree-diff
 
 配合gradle脚本,输出报告
 
+### 输出依赖树
+
 比如:
 
 ```shell
@@ -138,6 +140,35 @@ echo "生成依赖树到文件dependencies.txt中,每次建release时,以及发�
 
 ![image-20210524200502542](https://gitee.com/hss012489/picbed/raw/master/picgo/1621857902588-image-20210524200502542.jpg)
 
+### 输出依赖列表
+
+核心api
+
+```groovy
+runtimeConfiguration.resolvedConfiguration.lenientConfiguration.allModuleDependencies.forEach { dependency: ResolvedDependency ->
+                dependency.moduleArtifacts.forEach { artifact: ResolvedArtifact ->
+                    val newDep = MavenCoordinates(
+                        dependency.moduleGroup, dependency.moduleName,
+                        dependency.moduleVersion, artifact.type, artifact.classifier
+                    )
+                }
+}
+```
+
+定义task,挂载到工程,输出到文件:
+
+https://github.com/hss01248/flipperUtil/blob/master/deps/depsParser.gradle
+
+可以用于:
+
+* 检测snapshot版本
+* 检测过旧的版本
+* 检查实际依赖版本
+
+
+
+
+
 
 
 # 脚本里动态增删依赖
@@ -145,3 +176,32 @@ echo "生成依赖树到文件dependencies.txt中,每次建release时,以及发�
 https://juejin.cn/post/6971807367184777246
 
 https://github.com/hss01248/MyDataStore/blob/script/test.gradle
+
+# 一键发布工程中所有lib到nexus
+
+思路
+
+解析release依赖树
+
+从叶子开始发布
+
+发布后替换所有用到该lib的地方为远程依赖,然后再发布上一层
+
+脚本挂载到gradle的listener上,与工程完全解耦,仅远程脚本交互
+
+
+
+通用脚本使用如下:
+
+https://github.com/hss01248/flipperUtil/blob/master/deps/%E4%B8%80%E9%94%AE%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC.md
+
+
+
+
+
+# 参考
+
+[Gradle依赖管理](https://benweizhu.gitbooks.io/gradle-best-practice/content/dependency-management.html)
+
+[第五十章. 依赖管理](http://gradledoc.githang.com/2.0/userguide/dependency_management.html)
+
