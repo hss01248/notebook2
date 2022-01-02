@@ -1,5 +1,103 @@
 # gradle依赖管理
 
+# 历史演进
+
+* 1 最原始的: 拷代码,自己编译. 目前c和c++的依赖管理就是这个水平,没有统一的包管理工具
+
+* 2 帮你编译好,你去官网下载jar包,放到libs目录下
+
+* 3 所有jar到放到一个统一的地方,按统一的规则来组织,上传,下载.
+
+> 说jar包只是例子,aar,js,python库,都是这个范畴
+
+衍生出两个核心概念
+
+# 核心概念
+
+## 仓库
+
+用于存储,管理jar包等.
+
+又有中央仓库,镜像仓库,私有仓库(私服),本地仓库之分. 也是多级缓存的体现
+
+![image-20220102193901183](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102193901183.png.jpg)
+
+## 坐标
+
+![image-20220102194837396](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102194837396.png.jpg)
+
+com.google.zxing:core:2.3.0
+
+com.google.zxing--> groudId
+
+core --> artifactId
+
+2.3.0 -->version
+
+URL 统一资源定位符
+
+https://repo1.maven.org/maven2/com/google/zxing/core/2.3.0/
+
+
+
+maven仓库搜索:
+
+https://mvnrepository.com/
+
+
+
+## 文件结构
+
+### 远程仓库
+
+> groupId/artifactId路径下,metadata.xml存放了版本列表信息
+
+![image-20220102200436373](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102200436373.png.jpg)
+
+![image-20220102200524312](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102200524312.png.jpg)
+
+> 具体的版本号路径下,存储了这个版本发布的包
+>
+> 至少有pom.xml, 以及打包产物比如jar,aar,javadoc等
+
+![image-20220102200759009](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102200759009.png.jpg)
+
+pom.xml
+
+![image-20220102201409237](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102201409237.png.jpg)
+
+### 本地仓库
+
+#### 本地maven仓库: mavenLocal()
+
+> 没有metadata.xml
+
+![image-20220102201013895](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102201013895.png.jpg)
+
+
+
+![image-20220102201118920](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102201118920.png.jpg)
+
+#### gradle在本地的缓存文件夹
+
+> 存放的是aar解压后的文件. 而不是像mavenLocal一样原原本本的jar包/aar包
+
+![image-20220102202229073](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102202229073.png.jpg)
+
+![image-20220102202306086](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102202306086.png.jpg)
+
+> 文件名是那个依赖包的md5,无规律. 毕竟只是个缓存
+
+![image-20220102202455855](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102202455855.png.jpg)
+
+
+
+纯jar包的话,就没有解压缩成文件夹
+
+![image-20220102202742047](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102202742047.png.jpg)
+
+![image-20220102195125120](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102195125120.png.jpg)
+
 
 
 # 锁定依赖版本
@@ -20,11 +118,23 @@ project.configurations {
 
 # 排除依赖
 
-# 中断依赖传递链
-
 ## 单个
 
+```groovy
+api ('commons-httpclient:commons-httpclient:3.1'){
+        exclude group:'commons-codec' //排除该group的依赖
+        // exclude group:'commons-codec',module:'commons-codec'
+        // group是必选项，module可选
+    }
+```
 
+> 也可以替换传递的依赖:
+
+```groovy
+compile group:'a',name:'a',version:'l.0' {
+    dependencies 'b:b:1.1'
+}
+```
 
 
 
@@ -97,7 +207,7 @@ implementation 'org.example:library:1.0.0-SNAPSHOT'
 
 而release也可以一直发同一个版本,后发的会覆盖前一个发的.
 
-一般推荐关闭正式版本的覆盖功能,不允许覆盖,只允许升级.
+一般推荐关闭正式版本的覆盖功能,**不允许覆盖,只允许升级**.
 
 如果非要覆盖,那么gradle此处可以相应配置:
 
@@ -167,7 +277,15 @@ https://github.com/hss01248/flipperUtil/blob/master/deps/depsParser.gradle
 
 
 
+## 检查依赖列表里哪些版本有新版本,最新版本是多少,并输出报告
 
+仓库+坐标,访问其maven-metadata.xml,解析,并与项目中的对比即可.
+
+开启gradle的并发功能, 多线程并发请求加速, 主线程循环等待.
+
+[depsLastestChecker.gradle](https://github.com/hss01248/flipperUtil/blob/master/deps/depsLastestChecker.gradle)
+
+![image-20220102204000938](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102204000938.png.jpg)
 
 
 
@@ -179,23 +297,29 @@ https://github.com/hss01248/MyDataStore/blob/script/test.gradle
 
 # 一键发布工程中所有lib到nexus
 
+> maven本身就支持,而gradle需要自己写脚本实现
+
 思路
 
 解析release依赖树
 
-从叶子开始发布
+从叶子开始发布(深度优先)
 
-发布后替换所有用到该lib的地方为远程依赖,然后再发布上一层
+然后再发布上一层. 发布此层时发现为project依赖,则指定预先设置的groupId,artifactId,以及版本号再发布.
 
-脚本挂载到gradle的listener上,与工程完全解耦,仅远程脚本交互
+脚本挂载到gradle的listener上,与工程完全解耦,仅远程脚本交互.
+
+![image-20220102204233456](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102204233456.png.jpg)
+
+
+
+![image-20220102204410685](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102204410685.png.jpg)
 
 
 
 通用脚本使用如下:
 
-https://github.com/hss01248/flipperUtil/blob/master/deps/%E4%B8%80%E9%94%AE%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC.md
-
-
+[Android代码库一键发布到nexus/本地maven](https://github.com/hss01248/flipperUtil/blob/master/deps/%E4%B8%80%E9%94%AE%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC.md)
 
 
 
