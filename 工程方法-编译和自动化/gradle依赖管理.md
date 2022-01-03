@@ -100,9 +100,19 @@ pom.xml
 
 
 
-# 锁定依赖版本
+# 依赖版本
 
-## 全局
+## 统一管理依赖版本
+
+maven有dependencymanagement, 其子module不用指定版本号
+
+gradle: 使用rootProject里ext定义额外属性或者使用[Version Catalog](https://juejin.cn/post/6997396071055900680)这个新特性
+
+![image-20220102205243842](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102205243842.png.jpg)
+
+![image-20220102205256829](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102205256829.png.jpg)
+
+## 全局锁定依赖版本
 
 ```groovy
 project.configurations {
@@ -328,4 +338,24 @@ https://github.com/hss01248/MyDataStore/blob/script/test.gradle
 [Gradle依赖管理](https://benweizhu.gitbooks.io/gradle-best-practice/content/dependency-management.html)
 
 [第五十章. 依赖管理](http://gradledoc.githang.com/2.0/userguide/dependency_management.html)
+
+
+
+
+
+
+
+```groovy
+project.afterEvaluate { 
+    project.gradle.taskGraph.whenReady { 
+        println("=======> print allTasks")
+        println(project.gradle.taskGraph.allTasks) 
+    } 
+}
+
+作者：弄码哥nomag
+链接：https://juejin.cn/post/7043235150796161060
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
 
