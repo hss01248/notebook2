@@ -22,6 +22,40 @@
 
 ![image-20220102193901183](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102193901183.png.jpg)
 
+> 一个项目里会用到哪些仓库?
+
+```
+Google : https://dl.google.com/dl/android/maven2/
+BintrayJCenter : https://jcenter.bintray.com/
+MavenRepo : https://repo.maven.apache.org/maven2/
+maven : https://git.xxxx.com:8888/repository/maven-snapshots/
+maven2 : https://git.xxxx.com:8888/repository/maven-releases/
+maven3 : https://git.xxxx.com:8888/repository/maven-public/
+MavenLocal : file:/Users/hss/.m2/repository/
+maven4 : https://jitpack.io
+Google2 : https://dl.google.com/dl/android/maven2/
+BintrayJCenter2 : https://jcenter.bintray.com/
+MavenRepo2 : https://repo.maven.apache.org/maven2/
+maven5 : https://maven.fabric.io/public
+maven6 : https://jitpack.io
+Google3 : https://dl.google.com/dl/android/maven2/
+BintrayJCenter3 : https://jcenter.bintray.com/
+MavenRepo3 : https://repo.maven.apache.org/maven2/
+maven7 : https://jitpack.io
+MavenRepo4 : https://repo.maven.apache.org/maven2/
+BintrayJCenter4 : https://jcenter.bintray.com/
+Google4 : https://dl.google.com/dl/android/maven2/
+flatDir : null
+MavenLocal2 : file:/Users/hss/.m2/repository/
+maven8 : https://maven.google.com
+maven9 : https://jitpack.io
+maven10 : https://maven.fabric.io/public
+maven11 : https://oss.sonatype.org/content/repositories/snapshots/
+maven12 : http://nexus2.tingyun.com/nexus/content/repositories/snapshots/
+maven13 : https://git.xxxx.com:8888/repository/maven-snapshots/
+maven14 : https://git.xxxx.com:8888/repository/maven-releases/
+```
+
 ## 坐标
 
 ![image-20220102194837396](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102194837396.png.jpg)
@@ -46,6 +80,8 @@ https://mvnrepository.com/
 
 
 
+
+
 ## 文件结构
 
 ### 远程仓库
@@ -66,9 +102,48 @@ pom.xml
 
 ![image-20220102201409237](https://cdn.jsdelivr.net/gh/hss01248/picbed@master/pic/image-20220102201409237.png.jpg)
 
+
+
+### 私服-nexus
+
+开源,自行搭建.
+
+### 任意公开目录
+
+> 不想申请maven central账号,不想搭nexus, 不想用jitpack发,怎么搞? 
+>
+> 直接在任意公开目录,构建符合maven的文件结构,比如:
+
+示例:
+
+https://github.com/link-u/AndroidGlideAvifDecoder
+
+```groovy
+repositories {
+    ...
+    maven { url 'https://github.com/link-u/AndroidGlideAvifDecoder/raw/master/repository' }
+    ...
+}
+
+...
+
+implementation 'jp.co.link_u.library.glideavif:glideavif:0.8.1'
+```
+
+
+
 ### 本地仓库
 
 #### 本地maven仓库: mavenLocal()
+
+或者增加其他文件夹:
+
+```groovy
+maven { url "${System.env.HOME}/creativesdk-repo/release" }
+maven { url "../react-navive/android/gist" }
+```
+
+
 
 > 没有metadata.xml
 
