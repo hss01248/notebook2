@@ -100,6 +100,8 @@ https://github.com/hss01248/flipperUtil
 
 基于vpnservice.  最出色的为httpcanary. 可以只看特定应用的请求. 
 
+有小悬浮窗实时显示请求动态,十分方便,非常推荐.
+
 http://www.shensuxiazai.com/app/3631.html
 
 ## pc上的代理
