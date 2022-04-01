@@ -169,6 +169,16 @@ public MyObservable<T> observerOnBackThread(){
 
 
 
+# subscrib和onNext的调用时机和线程
+
+> subscrib什么时候调用
+
+
+
+> onNext什么时候调用
+
+
+
 ## 使用:
 
 ```java
