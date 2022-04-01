@@ -177,7 +177,9 @@ public MyObservable<T> observerOnBackThread(){
 
 > onNext什么时候调用
 
+如下图,先顺序执行,再逆序执行,再顺序执行
 
+![wecom-temp-cd9fbfbfcb98025a19f24b0dfe21ae26](https://cdn.jsdelivr.net/gh/shuiniuhss/myimages@main/imagemac/1648811968557-wecom-temp-cd9fbfbfcb98025a19f24b0dfe21ae26.jpg)
 
 ## 使用:
 
