@@ -181,6 +181,12 @@ public MyObservable<T> observerOnBackThread(){
 
 ![wecom-temp-cd9fbfbfcb98025a19f24b0dfe21ae26](https://cdn.jsdelivr.net/gh/shuiniuhss/myimages@main/imagemac/1648811968557-wecom-temp-cd9fbfbfcb98025a19f24b0dfe21ae26.jpg)
 
+
+
+比如,下方的调用,aop日志如下:
+
+![image-20220402111924169](https://cdn.jsdelivr.net/gh/shuiniuhss/myimages@main/imagemac/1648869564297-image-20220402111924169.jpg)
+
 ## 使用:
 
 ```java
