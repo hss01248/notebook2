@@ -185,7 +185,7 @@ public MyObservable<T> observerOnBackThread(){
 
 比如,下方的调用,aop日志如下:
 
-![image-20220402111924169](https://cdn.jsdelivr.net/gh/shuiniuhss/myimages@main/imagemac/1648869564297-image-20220402111924169.jpg)
+![Xnip2022-04-02_11-29-48](https://cdn.jsdelivr.net/gh/shuiniuhss/myimages@main/imagemac/1648870251838-Xnip2022-04-02_11-29-48.jpg)
 
 ## 使用:
 
@@ -200,14 +200,14 @@ public MyObservable<T> observerOnBackThread(){
 
 
             }
-        }).map(new MyFunc<Integer, String>() {
+        })//.subscribOnIO() //(打开时为上方截图的调用链)
+   .map(new MyFunc<Integer, String>() {
             @Override
             public Integer apply(String s) {
                 Log.d("map1:", "integer:" + s + "," + Thread.currentThread().getName());
                 return Integer.parseInt(s) * 2;
             }
-        })/*.subscribOnIO()
-        .observerOnMainThread()*/
+        })
         .map(new MyFunc<String, Integer>() {
             @Override
             public String apply(Integer integer) {
