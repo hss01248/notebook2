@@ -259,3 +259,6 @@ private void byFlatMap(Context context,  MyLocationCallback listener, LocationMa
     }
 ```
 
+# 利用rxjava对回调流程进行延迟重试
+
+![企业微信截图_4a0e0572-2dc8-4556-bc31-bd833c4f5a33](https://cdn.jsdelivr.net/gh/shuiniuhss/myimages@main/imagemac/1650859137881-%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_4a0e0572-2dc8-4556-bc31-bd833c4f5a33.jpg)
