@@ -416,6 +416,10 @@ https://github.com/hss01248/MyDataStore/blob/script/test.gradle
 
 
 
+# 非常好的博客
+
+[gradle官方文档-ResolutionStrategy dsl](https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.ResolutionStrategy.html)
+
 
 
 
