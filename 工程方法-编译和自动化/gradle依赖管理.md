@@ -1,5 +1,25 @@
 # gradle依赖管理
 
+# 官方工具
+
+```groovy
+./gradlew clean app:assembleDebug --scan
+```
+
+它会自动发送到[scans.gradle.com网址下](https://link.juejin.cn/?target=https%3A%2F%2Fscans.gradle.com%E7%BD%91%E5%9D%80%E4%B8%8B)
+
+有编译耗时统计
+
+![image-20220506145116311](https://cdn.jsdelivr.net/gh/shuiniuhss/myimages@main/imagemac/1651819881554-image-20220506145116311.jpg)
+
+![image-20220506145154868](https://cdn.jsdelivr.net/gh/shuiniuhss/myimages@main/imagemac/1651819914924-image-20220506145154868.jpg)
+
+
+
+且有依赖,仓库,插件列表分析:
+
+![image-20220506145245842](https://cdn.jsdelivr.net/gh/shuiniuhss/myimages@main/imagemac/1651819965897-image-20220506145245842.jpg)
+
 # 历史演进
 
 * 1 最原始的: 拷代码,自己编译. 目前c和c++的依赖管理就是这个水平,没有统一的包管理工具
