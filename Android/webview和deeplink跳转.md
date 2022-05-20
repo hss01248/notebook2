@@ -1,5 +1,11 @@
 # webview和deeplink跳转
 
+
+
+# demo工程
+
+https://github.com/hss01248/deeplinkDemo
+
 # deeplink接收
 
 参考 [Android 上玩转 DeepLink：如何最大程度的向 App 引流](https://juejin.cn/post/6844903620287135752)
