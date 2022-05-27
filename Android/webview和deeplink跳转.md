@@ -76,6 +76,23 @@ public class RouterActivty extends AppCompatActivity {
 >
 > 因为有的不走shouldOverrideUrlLoading
 
+```java
+public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    String scheme = request.getUrl().getScheme();
+                    if(!TextUtils.isEmpty(scheme) && !scheme.contains("http")){
+                        return DeepLinkJumpUtil.jump(view.getContext(),request.getUrl().toString());
+                    }
+                    return super.shouldOverrideUrlLoading(view, request);
+                }
+                return super.shouldOverrideUrlLoading(view, request);
+            }
+```
+
+
+
+
+
 处理方式:
 
 ```java
@@ -193,9 +210,17 @@ public static void jump(Context context,String newurl){
     }
 ```
 
+复杂参数示例:
 
+```tex
+intent://xxx.yyy.com?actionKey=DzAAAAAuuAA=&adjust_reftag=cmPkr9gOrmOOK#Intent;scheme=zzz;package=io.zzzz.uuuu;S.market_referrer=adjust_reftag%3DcmPkr9gOrmOOK;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dio.zzzz.uuuu%26referrer%3Dadjust_reftag%253DcmPkr9gOrimOOK;end
 
+需要解析并转换成真正的deeplink:
 
+│ args[0] = realUrl
+│ args[1] = zzz://xxx.yyy.com?actionKey=DzAAAAAuuAA=&adjust_reftag=cmPkr9gOrmOOK
+│ args[2] = {package=io.zzzz.uuuu, S.browser_fallback_url=https://play.google.com/store/apps/details?id=io.zzzz.uuuu&referrer=adjust_reftag%3DcmPkr9giOrmOOK, scheme=zzz, S.market_referrer=adjust_reftag=cmPkr9gOrmOOK}
+```
 
 ### 方式2:
 
@@ -324,31 +349,40 @@ shouldOverrideUrlLoading()->shouldInterceptRequest()->onPageStarted()->onPageFin
 
 ## 2.2 如何实现adjust那样的一个https链接自动识别是否安装app,自动跳转的功能
 
-> 关键在于如何让外部任意一个浏览器都能帮我们探测是否安装目标app
->
-> 只需要将https指向一个会web地址,在该页面上,先发一个延时3s重定向到google play的任务,
->
-> 然后立刻进行window.location.href=intent://xxxx.
+> 使用iframe打开deeplink,同时主window重定向到market://xxxx
 
-利用chrome的intent://功能
+示例:
 
 ```html
-js里怎么跳app: 本身的zljnews://zljnews/article/123456/,用js写是:
-<a href="intent://zljnews/recipe/100390954#Intent;scheme=zljnews;package=com.zhoulujue.news;end"> Intent scheme </a>  点击后,chrome会将url转义?
-参考  https://developer.chrome.com/docs/multidevice/android/intents/
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>仿adjust deeplink</title>
+
+</head>
+<body>
+<iframe src="ff://m.yyyy.com?actionKey=zCIMVAIAAAA=&id=6666666" width="0px" height="0px"></iframe>
+
+
+<script type="text/javascript">
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    if(isAndroid){
+        window.location.href = "market://details?id=cc.dd.ff&referer=xxxxxx";
+    }else if(isiOS){
+        window.location.href = 'itms-apps://itunes.apple.com/app/id414478724?action=write-review'
+    }else {
+        window.location.href = "https://play.google.com/store/apps/details?id=cc.dd.ff&referer=xxxxxx";
+    }
+
+</script>
+</body>
+</html>
 ```
 
-但需要各浏览器本身都适配intent://的协议,且在没有响应activity时跳转market://包名,甚至识别adjust的特有fallback url
 
-```tex
-intent://xxx.yyy.com?actionKey=DzAAAAAuuAA=&adjust_reftag=cmPkr9gOrmOOK#Intent;scheme=zzz;package=io.zzzz.uuuu;S.market_referrer=adjust_reftag%3DcmPkr9gOrmOOK;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dio.zzzz.uuuu%26referrer%3Dadjust_reftag%253DcmPkr9gOrimOOK;end
-
-需要解析并转换成真正的deeplink:
-
-│ args[0] = realUrl
-│ args[1] = zzz://xxx.yyy.com?actionKey=DzAAAAAuuAA=&adjust_reftag=cmPkr9gOrmOOK
-│ args[2] = {package=io.zzzz.uuuu, S.browser_fallback_url=https://play.google.com/store/apps/details?id=io.zzzz.uuuu&referrer=adjust_reftag%3DcmPkr9giOrmOOK, scheme=zzz, S.market_referrer=adjust_reftag=cmPkr9gOrmOOK}
-```
 
 ## 2.3 google play的延迟深度链接怎么做?
 
