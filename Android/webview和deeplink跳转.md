@@ -35,13 +35,15 @@ https://github.com/hss01248/deeplinkDemo
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="zljnews" />
-                <data android:host="zljnews" />
+                <data android:host="news.zhoulujue.com" />
                 <data android:pathPattern="/.*" />
             </intent-filter>
         </activity>
 ```
 
- activity里接收入参:
+ zljnews://news.zhoulujue.com/vvvvv
+
+activity里接收入参:
 
 ```java
 public class RouterActivty extends AppCompatActivity {
@@ -142,7 +144,7 @@ public static void jump(Context context,String newurl){
 分析intent://的格式,手动截字符串
 
 ```html
-<a href="intent://zljnews/recipe/100390954#Intent;scheme=zljnews;package=com.zhoulujue.news;end"> Intent scheme </a> 
+<a href="intent://news.zhoulujue.com/recipe/100390954#Intent;scheme=zljnews;package=com.zhoulujue.news;end"> Intent scheme </a> 
 ```
 
 解析
@@ -269,7 +271,7 @@ zljnews://zljnews/article/123456/
 api 'com.github.skyNet2017:webviewdebug:1.2.2-from117'
 ```
 
-## 1 初次进入,使用webvie.loadUrl(url):
+## 1 初次进入,使用webview.loadUrl(url):
 
 shouldInterceptRequest()->onPageStarted()->onPageFinished() 
 
@@ -379,3 +381,113 @@ https://play.google.com/store/apps/details?id=com.xxx.yyy&referrer=adjust_reftag
 [为应用广告添加深度链接](https://developers.facebook.com/docs/app-ads/deep-linking?locale=zh_CN)
 
 [App深度链接与延迟深度链接](https://www.biaodianfu.com/deep-link-deferred-deeplink.html)
+
+
+
+# 几句话总结
+
+## 如何让自己的app具有deeplink功能,如何接收deeplink传入的参数
+
+* 配置intent filter,标明shceme和host. ios和Android最好统一. 
+* 目标activity的oncreate里,getIntent().getData(),就能拿到对应Uri
+* deeplink+ 特定参数后台解析为内部通用跳转,可以便捷实现配置一个activity,而能deeplink至app内所有页面的能力
+
+
+
+
+
+## Android代码里对deeplink和intent协议的处理
+
+### 原生代码里
+
+### 对普通deeplink协议:
+
+```java
+String newUrl = "zljnews://news.zhoulujue.com/recipe/100390954";
+Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(newurl));
+```
+
+### 对intent协议
+
+```java
+String newUrl ="intent://zljnews/recipe/100390954#Intent;scheme=zljnews;package=com.zhoulujue.news;end"
+```
+
+方式1: 
+
+```java
+Intent intent = Intent.parseUri(newurl, Intent.URI_INTENT_SCHEME);
+intent.addCategory(Intent.CATEGORY_BROWSABLE);
+```
+
+方式2: 自己截取字符串
+
+```java
+private static boolean jumpByIntent(Context context,String newurl) {
+        int idx = newurl.indexOf("#");
+        if(idx<0){
+            LogUtils.w("非法intent,不带#",newurl);
+            return false;
+        }
+        String path0 = newurl.substring(0,idx);
+        String next = newurl.substring(idx+1);
+        if(!next.startsWith("Intent;") || !next.endsWith(";end")){
+            LogUtils.w("非法intent,不以end结尾",newurl);
+            return false;
+        }
+        Map<String,String> map = new HashMap<>();
+
+        String[] strings = next.split(";");
+        for (String string : strings) {
+            if(string.contains("=")){
+                String[] split = string.split("=");
+                map.put(split[0], URLDecoder.decode(split[1]));
+            }
+        }
+        if(map.containsKey("scheme") && map.containsKey("package")){
+            String realUrl = path0.replace("intent://",map.get("scheme")+"://");
+            LogUtils.w("realUrl",realUrl,map);
+            final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(realUrl));
+            ResolveInfo resolveInfo = context.getPackageManager().resolveActivity(intent, 0);
+            if(resolveInfo == null){
+                ToastUtils.showLong("没有对应的activity,跳去应用市场吧: "+ map.get("package"));
+                return false;
+            }
+            return jump(context, realUrl);
+        }
+        LogUtils.w("非法intent,不含scheme 和 package",newurl);
+        return false;
+    }
+```
+
+
+
+## 查看这个deeplink对应的app有没有安装
+
+两种方式:
+
+```java
+ResolveInfo resolveInfo = context.getPackageManager().resolveActivity(intent, 0);
+```
+
+或者
+
+```java
+List<ResolveInfo> resolveInfos = context.getPackageManager().queryIntentActivities(intent, 0);
+```
+
+获取对应app的包名和应用名
+
+```
+AppUtils.getAppName(resolveInfo.activityInfo.packageName)
+```
+
+## webview的client回调里
+
+几个事实
+
+* 1 Android sdk的 webview 本身不处理这些deeplink,以及intent协议. 即使这些协议是Android或chrome本身要求的.必须自己写上面的代码去处理
+
+* 2 一般都是处理shouldOverrideUrlLoading(),在这里拿到对应url,通过上面的代码进行处理. 一般浏览器app都是有处理的. 大多是通过resolveActivity/queryIntentActivities检测到有安装目标app后, 弹窗询问用户是否打开,如果没有安装,则没有任何反应
+* 对于像adjust这种通过https链接来提供打开app或跳转应用市场的能力的广告sdk, 链接本身并没有探测对应app是否安装的能力,只能通过iframe打开deeplink,同时重定向到market://协议的方式,同时试图打开对应app和跳到应用市场. 
+
