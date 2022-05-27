@@ -489,5 +489,6 @@ AppUtils.getAppName(resolveInfo.activityInfo.packageName)
 * 1 Android sdk的 webview 本身不处理这些deeplink,以及intent协议. 即使这些协议是Android或chrome本身要求的.必须自己写上面的代码去处理
 
 * 2 一般都是处理shouldOverrideUrlLoading(),在这里拿到对应url,通过上面的代码进行处理. 一般浏览器app都是有处理的. 大多是通过resolveActivity/queryIntentActivities检测到有安装目标app后, 弹窗询问用户是否打开,如果没有安装,则没有任何反应
+* 直接扫码或在浏览器地址栏输入deeplink或intent协议,不会触发跳转,而是显示错误页面,因为第一次浏览器第一次load的url不会走shouldOverrideUrlLoading(). 最终走到onReceiveError()里,对应errorCode 为WebViewClient.ERROR_UNSUPPORTED_SCHEME. 如果项目中webview需要兼容,可以在这里处理.
 * 对于像adjust这种通过https链接来提供打开app或跳转应用市场的能力的广告sdk, 链接本身并没有探测对应app是否安装的能力,只能通过iframe打开deeplink,同时重定向到market://协议的方式,同时试图打开对应app和跳到应用市场. 
 
