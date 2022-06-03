@@ -8,6 +8,22 @@ Observalbe.create() + flatmap
 
 
 
+## js类比
+
+> 其实和js里用promise改造callback是一样的操作
+
+![image-20220603110525793](https://cdn.jsdelivr.net/gh/shuiniuhss/myimages@main/image3/image-20220603110525793.png.jpg)
+
+![image-20220603110501984](https://cdn.jsdelivr.net/gh/shuiniuhss/myimages@main/image3/image-20220603110501984.png.jpg)
+
+上面js代码封装方法后:
+
+![image-20220603111047495](https://cdn.jsdelivr.net/gh/shuiniuhss/myimages@main/image3/image-20220603111047495.png.jpg)
+
+> js里的map reduce和rx里的也是差不多操作
+
+![image-20220603111226943](https://cdn.jsdelivr.net/gh/shuiniuhss/myimages@main/image3/image-20220603111226943.png.jpg)
+
 # 问题1:
 
 每个Observalbe.create()内部的emiter必须调用onComplete,否则最终onComplete不会回调
