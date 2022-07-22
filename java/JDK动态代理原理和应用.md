@@ -48,7 +48,7 @@
 
 日志
 
-https://git.silvrr.com/android-base/aop/-/blob/master/dymamicproxy/src/main/java/com/silvrr/base/dymamicproxy/LogProxy.java
+LogProxy.java
 
 任意通用型切面功能
 
