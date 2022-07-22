@@ -48,7 +48,7 @@ editText.addTextChangedListener(new TextWatcher(){
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 String chosen = mArrayList.get(position);
-                AkuToast.debug(chosen);
+                Toast.debug(chosen);
                 String s = str+chosen.substring(1);
                 mClearHideEditText.setText(s);
                 mClearHideEditText.setSelection(s.length());
